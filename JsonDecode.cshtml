@@ -1,0 +1,23 @@
+@{
+    var customer = Json.Decode("{\"CompanyName\":\"Centro comercial Moctezuma\"," + 
+        "\"Address\":\"Sierras de Granada 9993\",\"City\":\"México D.F.\"," + 
+        "\"PostalCode\":\"05022\",\"Country\":\"Mexico\",\"Phone\":\"(5) 555-3392\"," + 
+        "\"Fax\":\"(5) 555-7293\"}");
+}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+	<p>
+        <strong>@customer.CompanyName</strong><br />
+                @customer.Address<br />
+                @customer.City<br />
+                @customer.PostalCode<br />
+                @customer.Phone<br />
+                @customer.Fax
+        </p>
+	</body>
+</html>

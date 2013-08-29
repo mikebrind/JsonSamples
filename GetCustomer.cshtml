@@ -1,0 +1,8 @@
+@{
+    var db = Database.Open("Northwind40");
+    var id = UrlData[0] ?? "ALFKI";
+    var sql = @"SELECT [Company Name] AS CompanyName, Address, City, [Postal Code] As PostalCode, 
+                Country, Phone, Fax FROM Customers WHERE [Customer ID] = @0";
+    var item = db.QuerySingle(sql, id);
+    Json.Write(item, Response.Output);
+}

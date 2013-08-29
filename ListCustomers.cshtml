@@ -1,0 +1,6 @@
+@{
+    var db = Database.Open("Northwind40");
+    var sql = @"SELECT [Customer ID] AS CustomerID, [Company Name] AS CompanyName FROM Customers";
+    var data = db.Query(sql);
+    Json.Write(data, Response.Output);
+}

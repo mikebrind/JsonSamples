@@ -1,0 +1,42 @@
+@{
+    Layout = "/Shared/Layout.cshtml";
+}
+
+<script type="text/javascript">
+$(function(){
+    //Fill the customer drop down
+    $('#CustomerId').addOption('',"Loading....").attr('disabled', true);
+    $.getJSON('/ListCustomers', function(data) {
+        var customers = data;
+        $.each(customers, function(index, customer) {
+                var val = customer.CustomerID;
+                var text = customer.CompanyName;
+                $('#CustomerId').addOption(val, text, false);
+        });
+        $('#CustomerId').removeOption(0).attr('disabled', false);
+    });
+    
+    //Post the chosen customer id and retrieve the customer details
+    $('#CustomerId').change(function() {
+        $.ajax({
+        type: "POST",
+        url: "/GetCustomer/" + $(this).val(),
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data) {
+        var customer = data;
+        $('#details').empty();
+        $('#details').append('<p><strong>' + customer.CompanyName + '</strong><br />' +
+                                customer.Address + '<br />' +
+                                customer.City + '<br />' +
+                                customer.PostalCode + '<br />' +
+                                customer.Phone + '<br />' +
+                                customer.Fax + '</p>');
+        }
+      });
+    });
+  });
+  </script>
+<select id="CustomerId" name="CustomerId"></select>
+<div id="details"></div>
